@@ -1,21 +1,8 @@
-# pull the base image
-FROM node:alpine
-
-# set the working direction
+FROM node:latest as node
+RUN mkdir -p /app
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install app dependencies
-COPY package.json ./
-
-COPY package-lock.json ./
-
-RUN npm install
-
-# add app
-COPY . ./
-
-# start app
-CMD ["npm", "start"]
+COPY package*.json /app/
+RUN npm install 
+COPY . /app/
+EXPOSE 4200
+CMD ["npm", "run", "start"]
