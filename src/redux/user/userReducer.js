@@ -22,7 +22,7 @@ export const userReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         user: {
           ...state.user,
-          loginStatus: "Success",
+          loginStatus: "Fail",
         },
       });
 
