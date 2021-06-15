@@ -2,9 +2,8 @@ import { USER_LOGIN_SUCCESS, USER_LOGIN_FAILURE } from "./action_types";
 
 const initialState = {
   user: {
-    email: "",
-    password: "",
-    loginStatus: "Pending",
+       loginStatus: "Pending",
+
   },
 };
 
