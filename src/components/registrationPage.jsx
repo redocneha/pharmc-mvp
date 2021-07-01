@@ -1,7 +1,7 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginSubmit } from "../redux/user/actions";
+import { loginSubmit , registrationSubmit } from "../redux/user/actions";
 import style from './registerStyle'
 function RegistrationPage() {
   const [userLoginDetails, setUserLoginDetails] = useState({
@@ -22,7 +22,7 @@ function RegistrationPage() {
     });
   };
   const handleSubmit = (event) => {
-    dispatch(loginSubmit(userLoginDetails, event));
+    dispatch(registrationSubmit(userLoginDetails, event));
   };
   return (
     <div style={style.form}>

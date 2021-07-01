@@ -18,7 +18,7 @@ export const userLoginFailure = () =>{
 export const loginSubmit = (data,event) => {
    return dispatch=> {
         event.preventDefault();
-          axios.post("https://run.mocky.io/v3/1342edb6-fd02-4dfe-8a61-f28279563081",data)
+          axios.post("http://localhost:8091/user/login/",data)
          .then(response =>{
             dispatch(userLoginSuccess());
           console.log(response);
@@ -36,7 +36,7 @@ export const loginSubmit = (data,event) => {
 export const registrationSubmit = (data,event) => {
     return dispatch=> {
          event.preventDefault();
-           axios.post("https://run.mocky.io/v3/1342edb6-fd02-4dfe-8a61-f28279563081",data)
+           axios.post("http://localhost:8091/user/",data)
           .then(response =>{
            console.log(response);
            history.push('/')
