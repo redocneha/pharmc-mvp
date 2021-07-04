@@ -3,6 +3,7 @@ import {useState} from 'react';
 import { useDispatch } from "react-redux";
 // import {connect} from 'react-redux';
 import {loginSubmit} from '../redux/user/actions'
+import { useSelector } from "react-redux";
 
 function LoginPage() {
    const [email,setEmail] = useState("");
@@ -20,9 +21,11 @@ function LoginPage() {
         setUserLoginDetails(userLoginDetails);
         dispatch(loginSubmit(userLoginDetails,event))
    }
+   const userId = useSelector((state) => state.user.id);
   return (
     <>
       <h2>Login Page</h2>
+      {userId !== 0 && <h4>{userId}</h4> }
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>         

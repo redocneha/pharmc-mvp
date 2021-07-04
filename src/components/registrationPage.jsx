@@ -1,9 +1,12 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginSubmit , registrationSubmit } from "../redux/user/actions";
-import style from './registerStyle'
+import { registrationSubmit } from "../redux/user/actions";
+import { useSelector } from "react-redux";
+import './registrationPage.scss'
+
 function RegistrationPage() {
+  
   const [userLoginDetails, setUserLoginDetails] = useState({
     firstName: "",
     lastName: "",
@@ -12,6 +15,13 @@ function RegistrationPage() {
     mobileNo: "",
     gender: "",
   });
+
+  var registrationStatus = useSelector((state) => state.user.registrationStatus);
+  const [registrationState, setRegistrationState] = useState({
+    className:"",
+    formError: ""
+  });
+  
   const dispatch = useDispatch();
   const handleInputChange = (event) => {
     let textName = event.target.name;
@@ -21,21 +31,45 @@ function RegistrationPage() {
       [textName]: textVal,
     });
   };
+
   const handleSubmit = (event) => {
-    dispatch(registrationSubmit(userLoginDetails, event));
+    var flag = 0;
+    const keys = Object.keys(userLoginDetails);
+    for(let count=0; count < keys.length; count++){
+      const key = keys[count];
+      if(userLoginDetails[key] !== ""){
+        flag++;
+        setRegistrationState({
+          ...registrationState,
+          formError : "error"
+        });
+      }
+    }
+    if(flag === keys.length ){
+      dispatch(registrationSubmit(userLoginDetails, event));
+      if(registrationStatus !== "Success"){
+        setRegistrationState({
+          formError : "",
+          className: "error"
+        });
+      }
+    }
   };
   return (
-    <div style={style.form}>
+    <div className="cmp-registration col-md-6">
       <h2>Registration Page</h2>
+      {registrationState.formError !=="" && <h2 className="error">Please fill All the fields</h2>}
       <Form >
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label className= { registrationState.className}>Email address:</Form.Label>
+          {registrationStatus !=="Success" && <span className= { registrationState.className} >{ registrationStatus}</span> }
           <Form.Control
             className="formBasicEmail"
             placeholder="Enter email"
             name="email"
             value={userLoginDetails.email}
             onChange={(event) => handleInputChange(event)}
+            required
           />
         </Form.Group>
         <Form.Group controlId="formFirstName">
@@ -45,6 +79,7 @@ function RegistrationPage() {
             placeholder="Enter First Name"
             name="firstName"
             value={userLoginDetails.firstName}
+            required
             onChange={(event) => handleInputChange(event)}
           />
         </Form.Group>
@@ -55,6 +90,7 @@ function RegistrationPage() {
             placeholder="Enter Last Name"
             name="lastName"
             value={userLoginDetails.lastName}
+            required
             onChange={(event) => handleInputChange(event)}
           />
         </Form.Group>
@@ -65,6 +101,7 @@ function RegistrationPage() {
             placeholder="Enter mobile number"
             name="mobileNo"
             value={userLoginDetails.mobileNo}
+            required
             onChange={(event) => handleInputChange(event)}
           />
         </Form.Group>
@@ -73,14 +110,17 @@ function RegistrationPage() {
           label="Male"
           name="gender"
           id="gender1"
+          value="M"
+          required
           onChange={(event) => handleInputChange(event)}
         />
         <Form.Check
           type="radio"
           label="Female"
           name="gender"
-          value="Female"
+          value="F"
           id="gender2"
+          required
           onChange={(event) => handleInputChange(event)}
         />
         <Form.Group controlId="formBasicPassword">
@@ -91,10 +131,11 @@ function RegistrationPage() {
             placeholder="Enter Password"
             name="password"
             value={userLoginDetails.password}
+            required
             onChange={(event) => handleInputChange(event)}
           />{" "}
         </Form.Group>
-        <div  style={style.button}>
+        <div>
         <Button  variant="primary" type="submit" onClick={handleSubmit}>
           Submit
         </Button>

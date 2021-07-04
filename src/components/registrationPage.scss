@@ -1,0 +1,9 @@
+
+$myColor: red;
+ 
+.cmp-registration {
+    margin: 0 auto;
+    .error{
+        color: $myColor;
+    }
+}

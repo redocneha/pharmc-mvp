@@ -1,4 +1,4 @@
-import {  USER_LOGIN_FAILURE, USER_LOGIN_SUCCESS } from './action_types'
+import { GLOBAL } from './action_types'
 import axios from 'axios'
  import {history} from '../../helpers/history'
 
@@ -6,13 +6,25 @@ import axios from 'axios'
 
 export const userLoginSuccess = () =>{
     return {
-        type: USER_LOGIN_SUCCESS,
+        type: GLOBAL.USER_LOGIN_SUCCESS,
     }
 }
 export const userLoginFailure = () =>{
     return {
-        type: USER_LOGIN_FAILURE,
+        type: GLOBAL.USER_LOGIN_FAILURE,
     }
+}
+export const userRegistrationSuccess = (response) =>{
+  return {
+      type: GLOBAL.USER_REGISTRATION_SUCCESS,
+      payload: response
+  }
+}
+export const userRegistrationfailure = (response) =>{
+  return {
+      type: GLOBAL.USER_REGISTRATION_FAILURE,
+      payload: response
+  }
 }
 
 export const loginSubmit = (data,event) => {
@@ -20,9 +32,15 @@ export const loginSubmit = (data,event) => {
         event.preventDefault();
           axios.post("http://localhost:8091/user/login/",data)
          .then(response =>{
+           if(response.data.loginStatusMessage === "Success"){
             dispatch(userLoginSuccess());
-          console.log(response);
-          history.push('/home')
+            console.log(response);
+            history.push('/home')
+           } else{
+            dispatch(userLoginFailure());
+            console.log(response);
+            history.push('/home')
+           }
          })
          .catch(error=>{
               dispatch(userLoginFailure())
@@ -32,19 +50,26 @@ export const loginSubmit = (data,event) => {
        }
 
   };
-  
+  const handleRegistrationResponse = (response) => {
+    return dispatch=> {
+    if(response.data.registrationStatusMessage === "Success"){
+      dispatch(userRegistrationSuccess(response.data));
+      dispatch(userLoginSuccess());
+      history.push('/home');
+    }else {
+      dispatch(userRegistrationfailure(response.data));
+    }
+  }
+  }
 export const registrationSubmit = (data,event) => {
     return dispatch=> {
          event.preventDefault();
            axios.post("http://localhost:8091/user/",data)
           .then(response =>{
-           console.log(response);
-           history.push('/')
+            dispatch(handleRegistrationResponse(response));
           })
           .catch(error=>{
-              console.log(error)
+              console.log(error);
           })
-         
         }
- 
-   };
+   }
