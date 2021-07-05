@@ -1,3 +1,4 @@
+import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 import { GLOBAL } from "./action_types";
 
 const initialState = {
@@ -15,6 +16,7 @@ export const userReducer = (state = initialState, action) => {
         user: {
           ...state.user,
           loginStatus: "Success",
+          id: action.payload.id
         },
       });
 
@@ -22,7 +24,7 @@ export const userReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         user: {
           ...state.user,
-          loginStatus: "Fail",
+          loginStatus: action.payload.loginStatusMessage,
         },
       });
 

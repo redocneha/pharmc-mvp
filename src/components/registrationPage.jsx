@@ -63,82 +63,28 @@ function RegistrationPage() {
         <Form.Group controlId="formBasicEmail">
           <Form.Label className= { registrationState.className}>Email address:</Form.Label>
           {registrationStatus !=="Success" && <span className= { registrationState.className} >{ registrationStatus}</span> }
-          <Form.Control
-            className="formBasicEmail"
-            placeholder="Enter email"
-            name="email"
-            value={userLoginDetails.email}
-            onChange={(event) => handleInputChange(event)}
-            required
-          />
+          <Form.Control className="formBasicEmail" placeholder="Enter email" name="email" value={userLoginDetails.email} onChange={(event) => handleInputChange(event)} required/>
         </Form.Group>
         <Form.Group controlId="formFirstName">
           <Form.Label>First Name</Form.Label>
-          <Form.Control
-            className="formFirstName"
-            placeholder="Enter First Name"
-            name="firstName"
-            value={userLoginDetails.firstName}
-            required
-            onChange={(event) => handleInputChange(event)}
-          />
+          <Form.Control className="formFirstName" placeholder="Enter First Name" name="firstName" value={userLoginDetails.firstName} required onChange={(event) => handleInputChange(event)} />
         </Form.Group>
         <Form.Group controlId="formLastName">
           <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            className="formLastName"
-            placeholder="Enter Last Name"
-            name="lastName"
-            value={userLoginDetails.lastName}
-            required
-            onChange={(event) => handleInputChange(event)}
-          />
+          <Form.Control className="formLastName" placeholder="Enter Last Name" name="lastName" value={userLoginDetails.lastName} required onChange={(event) => handleInputChange(event)} />
         </Form.Group>
         <Form.Group controlId="formMobileNo">
           <Form.Label>Mobile Number</Form.Label>
-          <Form.Control
-            className="formMobileNo"
-            placeholder="Enter mobile number"
-            name="mobileNo"
-            value={userLoginDetails.mobileNo}
-            required
-            onChange={(event) => handleInputChange(event)}
-          />
+          <Form.Control className="formMobileNo" placeholder="Enter mobile number" name="mobileNo" value={userLoginDetails.mobileNo} required onChange={(event) => handleInputChange(event)} />
         </Form.Group>
-        <Form.Check
-          type="radio"
-          label="Male"
-          name="gender"
-          id="gender1"
-          value="M"
-          required
-          onChange={(event) => handleInputChange(event)}
-        />
-        <Form.Check
-          type="radio"
-          label="Female"
-          name="gender"
-          value="F"
-          id="gender2"
-          required
-          onChange={(event) => handleInputChange(event)}
-        />
+        <Form.Check type="radio" label="Male" name="gender" id="gender1" value="M" required onChange={(event) => handleInputChange(event)} />
+        <Form.Check type="radio" label="Female" name="gender" value="F" id="gender2" required onChange={(event) => handleInputChange(event)} />
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            className="password"
-            placeholder="Enter Password"
-            name="password"
-            value={userLoginDetails.password}
-            required
-            onChange={(event) => handleInputChange(event)}
-          />{" "}
+          <Form.Control type="password" className="password" placeholder="Enter Password" name="password" value={userLoginDetails.password} required onChange={(event) => handleInputChange(event)} />{" "}
         </Form.Group>
         <div>
-        <Button  variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
+        <Button  variant="primary" type="submit" onClick={handleSubmit}> Submit </Button>
         </div>
       </Form>
     </div>

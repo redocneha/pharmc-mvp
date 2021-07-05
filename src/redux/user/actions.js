@@ -4,14 +4,16 @@ import axios from 'axios'
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-export const userLoginSuccess = () =>{
+export const userLoginSuccess = (response) =>{
     return {
         type: GLOBAL.USER_LOGIN_SUCCESS,
+        payload: response
     }
 }
-export const userLoginFailure = () =>{
+export const userLoginFailure = (response) =>{
     return {
         type: GLOBAL.USER_LOGIN_FAILURE,
+        payload: response
     }
 }
 export const userRegistrationSuccess = (response) =>{
@@ -33,17 +35,16 @@ export const loginSubmit = (data,event) => {
           axios.post("http://localhost:8091/user/login/",data)
          .then(response =>{
            if(response.data.loginStatusMessage === "Success"){
-            dispatch(userLoginSuccess());
+            dispatch(userLoginSuccess(response.data));
             console.log(response);
             history.push('/home')
            } else{
-            dispatch(userLoginFailure());
+            dispatch(userLoginFailure(response.data));
             console.log(response);
-            history.push('/home')
            }
          })
          .catch(error=>{
-              dispatch(userLoginFailure())
+              // dispatch(userLoginFailure())
              console.log(error)
          })
         
