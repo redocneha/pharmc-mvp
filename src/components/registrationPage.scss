@@ -2,11 +2,49 @@
 $myColor: red;
  
 .cmp-registration {
-    margin: 0 auto;
-    .error{
-        color: $myColor;
+    .registration-title {
+        margin: 0;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 32px;
+        line-height: 1.25;
+        font-weight: 400;
     }
-    .btn-submitLogin {
-        
+    .registration-container {
+        margin: 0 auto;
+        .registration-form-container {
+            box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+            padding: 24px 32px 32px;
+            border-radius: 8px;
+            background: #fff;
+            .field-container {
+                padding: 10px 0 0;
+                .form-label {
+                    font-weight: bold;
+                }
+            }
+            .error{
+                color: $myColor;
+            }
+            .btn-submit {
+                background-color: teal;
+                width: 100%;
+                margin-top: 30px;
+            }
+        }
+        .login-now {
+            text-align: center;
+            padding: 40px 0 20px;
+            .login-link {
+                text-decoration: none;
+                color: #0a66c2;
+                border-radius: 30px !important;
+                padding: 0 10px;
+                &:hover {
+                    background: #d0e8ff;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import "./App.css";
+import './global.scss'
 import LoginPage from "./components/loginPage";
 import { store, persistor } from "./redux/store";
 import { Router, Switch } from "react-router-dom";
@@ -11,6 +11,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { LogoutPage } from "./components/logoutPage";
 import { Navbar , Nav } from "react-bootstrap";
 import RegistrationPage from "./components/registrationPage";
+import Footer from "./components/footer";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
             ></PrivateRoute>
             <PrivateRoute path="/home" component={HomePage}></PrivateRoute>
           </Switch>
-
+          <Footer/>
           <div className="App">{/* <LoginPage/> */}</div>
         </Router>
       {/* </PersistGate> */}

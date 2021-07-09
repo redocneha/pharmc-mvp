@@ -30,9 +30,9 @@ export const userRegistrationfailure = (response) =>{
 }
 
 export const loginSubmit = (data,event) => {
-   return dispatch=> {
+   return async dispatch=> {
         event.preventDefault();
-          axios.post("http://localhost:8091/user/login/",data)
+          await axios.post("http://localhost:8091/user/login/",data)
          .then(response =>{
            if(response.data.loginStatusMessage === "Success"){
             dispatch(userLoginSuccess(response.data));
@@ -55,7 +55,7 @@ export const loginSubmit = (data,event) => {
     return dispatch=> {
     if(response.data.registrationStatusMessage === "Success"){
       dispatch(userRegistrationSuccess(response.data));
-      dispatch(userLoginSuccess());
+      dispatch(userLoginSuccess(response.data));
       history.push('/home');
     }else {
       dispatch(userRegistrationfailure(response.data));
