@@ -29,15 +29,26 @@ export const userRegistrationfailure = (response) =>{
   }
 }
 
+export const userLogoutSuccess = (response) =>{
+  return {
+      type: GLOBAL.USER_LOGOUT_SUCCESS,
+      payload: ""
+  }
+}
 export const loginSubmit = (data,event) => {
    return async dispatch=> {
         event.preventDefault();
           await axios.post("http://localhost:8091/user/login/",data)
          .then(response =>{
            if(response.data.loginStatusMessage === "Success"){
+             response.data.isSeller=data.isSeller;
             dispatch(userLoginSuccess(response.data));
             console.log(response);
-            history.push('/home')
+            if(data.isSeller === "true"){
+              history.push('/sellerhome');
+            }else{
+              history.push('/home');
+            }
            } else{
             dispatch(userLoginFailure(response.data));
             console.log(response);
@@ -49,7 +60,6 @@ export const loginSubmit = (data,event) => {
          })
         
        }
-
   };
   const handleRegistrationResponse = (response) => {
     return dispatch=> {
@@ -73,4 +83,10 @@ export const registrationSubmit = (data,event) => {
               console.log(error);
           })
         }
+   }
+
+   export const logoutSubmit = (data) => {
+     return dispatch=> {
+      dispatch(userLogoutSuccess(data));
+     }
    }

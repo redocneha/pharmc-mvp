@@ -1,12 +1,15 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-
+import ShowProducts from './showProducts';
+import './homePage.scss'
 function HomePage (){
     const userId = useSelector((state) => state.user.id);
+    const isSeller = useSelector((state) => state.user.isSeller)
 return(
     <>
-    {userId !== 0 && <h4>{userId}</h4> }
-    <h2>Welcome to home page</h2>
+    <div className="cmp-homepage">
+    <ShowProducts></ShowProducts>
+    </div>
     </>
 )
 

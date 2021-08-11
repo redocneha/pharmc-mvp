@@ -4,11 +4,13 @@ import LoginPage from "./components/loginPage";
 import { store, persistor } from "./redux/store";
 import { Router, Switch } from "react-router-dom";
 import HomePage from "./components/homePage";
+import SellerHomepage from "./components/sellerHomePage";
+import SellerConfirmOrders from "./components/sellerConfirmOrders"
 import { history } from "./helpers/history";
 import PrivateRoute from "./components/router/privateRoute";
 import PublicRoute from "./components/router/publicRoute";
 import { PersistGate } from "redux-persist/integration/react";
-import { LogoutPage } from "./components/logoutPage";
+import LogoutPage  from "./components/logoutPage";
 import { Navbar , Nav } from "react-bootstrap";
 import RegistrationPage from "./components/registrationPage";
 import Footer from "./components/footer";
@@ -16,7 +18,7 @@ import Footer from "./components/footer";
 function App() {
   return (
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
+      <PersistGate loading={null} persistor={persistor}>
         <Router history={history}>
           <Navbar>
             <Navbar.Brand href="/">Pharmc</Navbar.Brand>
@@ -36,11 +38,13 @@ function App() {
               component={LogoutPage}
             ></PrivateRoute>
             <PrivateRoute path="/home" component={HomePage}></PrivateRoute>
+            <PrivateRoute path="/sellerhome" component={SellerHomepage}></PrivateRoute>
+            <PrivateRoute path="/sellerconfirmorder" component = {SellerConfirmOrders}></PrivateRoute>
           </Switch>
           <Footer/>
           <div className="App">{/* <LoginPage/> */}</div>
         </Router>
-      {/* </PersistGate> */}
+      </PersistGate>
     </Provider>
   );
 }

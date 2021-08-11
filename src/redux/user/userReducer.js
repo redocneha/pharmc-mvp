@@ -5,7 +5,8 @@ const initialState = {
   user: {
        loginStatus: "Pending",
        registrationStatus: "",
-       id: 0
+       id: 0,
+       isSeller: "false"
   },
 };
 
@@ -16,7 +17,8 @@ export const userReducer = (state = initialState, action) => {
         user: {
           ...state.user,
           loginStatus: "Success",
-          id: action.payload.id
+          id: action.payload.id,
+          isSeller: action.payload.isSeller
         },
       });
 
@@ -44,6 +46,16 @@ export const userReducer = (state = initialState, action) => {
               registrationStatus: action.payload.registrationStatusMessage,
             },
           });
+          case GLOBAL.USER_LOGOUT_SUCCESS:
+            return Object.assign({}, state, {
+              user: {
+                ...state.user,
+                loginStatus: "Pending",
+                registrationStatus: "",
+                id: 0,
+                isSeller: "false"
+              }
+            });
 
     default:
       return state;

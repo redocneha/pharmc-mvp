@@ -1,7 +1,17 @@
-import React from 'react';
+import { useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {logoutSubmit} from '../redux/user/actions'
+function LogoutPage() {
 
-export const LogoutPage = () =>{
-    return(
-        <h2> Succesfully Logged Out</h2>
+    const id = useSelector((state) => state.user.id);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(logoutSubmit(id));
+    })
+    return (
+        <>
+        <h2>You are loggedout. Please close the browser</h2>
+        </>
     )
 }
+export default LogoutPage;

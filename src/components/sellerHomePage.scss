@@ -1,0 +1,48 @@
+$blue: #00338D;
+$medium-blue: #005eb8;
+
+.sellerhomepage {
+    .confirmorder, .productpage,.paymenthistory {
+        margin: 10px 0;
+        .link {
+            text-decoration: none;
+            color: #fff;
+        }
+    }
+    .unconfirmedorders {
+        .unconfirmed-title {
+            padding: 0;
+        }
+    }
+    .unconfirmed-pagination {
+        width: 75%;
+        margin: 0 auto;
+        .unconfirmed-data {
+            margin: 0 auto;
+        }
+        .pagination {
+            justify-content: center;
+            li {
+                padding: 10px;
+                border: 1px solid cadetblue;
+                &.active {
+                    background-color: darkcyan;
+                    color: #fff;
+                }
+            }
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+              }
+            tr:nth-child(odd) {
+                background-color: lightsteelblue;
+              }
+        }
+    }
+}

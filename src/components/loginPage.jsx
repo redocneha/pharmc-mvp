@@ -127,6 +127,7 @@ function LoginPage() {
 //             "email":"nnjwnd"
 //         }))
 //     }
+
 // }
  //export default connect(null,mapDispatchToProps)(LoginPage);
 
